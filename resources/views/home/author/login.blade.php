@@ -1,6 +1,7 @@
 <section class="login-page min-vh-100 d-flex align-items-center py-5">
     @php
         $loginButtonColor = '#28a745';
+        $adminLoginLabel = \App\Models\Setting::getValue('admin_login_label', 'Login Admin');
     @endphp
     <style>
         .login-page {
@@ -111,7 +112,7 @@
                         </div>
                         <div class="col-md-7 p-5">
                             <div class="mb-4 text-center">
-                                <h3 class="font-weight-bold mb-1">Login Admin</h3>
+                                <h3 class="font-weight-bold mb-1">{{ $adminLoginLabel }}</h3>
                                 <p class="text-muted mb-0">Silahkan login dengan akun Anda.</p>
                             </div>
 

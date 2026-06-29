@@ -38,4 +38,24 @@ class SettingHeaderLogoTest extends TestCase
         $this->assertStringStartsWith('/images/', $setting->value);
         $this->assertFileExists(public_path(ltrim($setting->value, '/')));
     }
+
+    public function test_admin_login_label_can_be_saved_and_rendered(): void
+    {
+        Setting::where('key', 'admin_login_label')->delete();
+
+        $request = new Request();
+        $request->merge(['admin_login_label' => 'Masuk Admin']);
+
+        $controller = new SettingController();
+        $response = $controller->update($request);
+
+        $this->assertTrue($response->isRedirect('/admin/settings'));
+
+        $setting = Setting::where('key', 'admin_login_label')->first();
+        $this->assertNotNull($setting);
+        $this->assertSame('Masuk Admin', $setting->value);
+
+        $view = view('home.layouts.header', ['headerLogo' => null])->render();
+        $this->assertStringContainsString('Masuk Admin', $view);
+    }
 }

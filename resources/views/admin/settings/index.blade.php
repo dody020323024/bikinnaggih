@@ -25,6 +25,34 @@
     </div>
 @endif
 
+<form action="{{ route('admin.settings.update') }}" method="POST" class="mb-4">
+    @csrf
+    <div class="card shadow-sm" style="border: 1px solid rgba(122, 31, 31, 0.12);">
+        <div class="card-body p-4">
+            <div class="d-flex align-items-center mb-3">
+                <div class="settings-icon-wrapper mr-3" style="background: linear-gradient(135deg, #7a1f1f, #a62828); color: #fff3c4;">
+                    <i class="fas fa-user-shield"></i>
+                </div>
+                <div>
+                    <h5 class="fw-bold mb-0" style="font-family: var(--font-display); color: #7a1f1f;">Label Login Admin</h5>
+                    <small class="text-muted">Nama yang muncul pada tombol Login Admin dan halaman login</small>
+                </div>
+            </div>
+            <div class="row align-items-end">
+                <div class="col-md-8">
+                    <label for="admin_login_label" class="form-label fw-bold">Nama yang tampil</label>
+                    <input type="text" class="form-control" id="admin_login_label" name="admin_login_label" value="{{ old('admin_login_label', $adminLoginLabel) }}" placeholder="Login Admin">
+                </div>
+                <div class="col-md-4 mt-3 mt-md-0">
+                    <button type="submit" class="btn btn-primary px-4 w-100" style="background: linear-gradient(135deg, #7a1f1f, #a62828); border: none;">
+                        <i class="fas fa-save mr-1"></i> Simpan Label
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
 <div class="row" id="settingsGrid">
     {{-- ===== HERO IMAGE ===== --}}
     <div class="col-lg-6">

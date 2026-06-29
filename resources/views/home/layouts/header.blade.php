@@ -72,6 +72,9 @@
     object-fit: cover;
   }
 </style>
+@php
+  $adminLoginLabel = \App\Models\Setting::getValue('admin_login_label', 'Login Admin');
+@endphp
 <header class="sticky-top">
   <nav class="navbar navbar-expand-md navbar-light navbar-custom">
     <div class="container">
@@ -102,7 +105,7 @@
         <div class="d-flex align-items-center ms-3">
           <a href="/login" class="btn btn-admin-login d-flex align-items-center gap-2">
             <i class="fas fa-user-circle"></i>
-            <span>Login Admin</span>
+            <span>{{ $adminLoginLabel }}</span>
           </a>
         </div>
       </div>
