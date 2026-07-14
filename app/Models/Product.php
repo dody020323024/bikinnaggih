@@ -13,4 +13,9 @@ class Product extends Model
         'image',
         'is_active',
     ];
+
+    public function reviews()
+    {
+        return $this->hasMany(Review::class);
+    }
 }

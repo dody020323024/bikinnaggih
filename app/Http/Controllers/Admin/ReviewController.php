@@ -12,7 +12,7 @@ class ReviewController extends Controller
     {
         $data = [
             'content' => 'admin.reviews.index',
-            'reviews' => Review::latest()->get(),
+            'reviews' => Review::with('product')->latest()->get(),
             'title' => 'Kritik & Saran',
         ];
         return view('admin.layouts.wrapper', $data);

@@ -86,6 +86,20 @@
                             <input type="email" class="form-control form-control-custom" name="email" placeholder="Masukkan email aktif" required>
                         </div>
 
+                        <!-- Product Selection -->
+                        <div class="form-group mb-4">
+                            <label class="form-label fw-bold small text-uppercase text-muted mb-2">Pilih Produk</label>
+                            <select name="product_id" class="form-control form-control-custom" required>
+                                <option value="">Pilih produk yang Anda review</option>
+                                @foreach($reviewProducts as $product)
+                                    <option value="{{ $product->id }}" {{ old('product_id') == $product->id ? 'selected' : '' }}>{{ $product->name }}</option>
+                                @endforeach
+                            </select>
+                            @error('product_id')
+                                <small class="text-danger">{{ $message }}</small>
+                            @enderror
+                        </div>
+
                         <!-- Star Rating -->
                         <div class="form-group mb-4">
                             <label class="form-label fw-bold small text-uppercase text-muted mb-2">Rating</label>

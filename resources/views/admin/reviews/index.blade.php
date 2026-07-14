@@ -16,6 +16,7 @@
                                 <th>No</th>
                                 <th>Nama</th>
                                 <th>Email</th>
+                                <th>Produk</th>
                                 <th>Rating</th>
                                 <th>Pesan</th>
                                 <th>Tanggal</th>
@@ -31,6 +32,7 @@
                                     <strong>{{ $review->name }}</strong>
                                 </td>
                                 <td>{{ $review->email }}</td>
+                                <td>{{ $review->product?->name ?? '-' }}</td>
                                 <td>
                                     <div class="review-stars-admin">
                                         @for($i = 1; $i <= 5; $i++)
@@ -73,7 +75,7 @@
                             </tr>
                             @empty
                             <tr>
-                                <td colspan="8" class="text-center py-5 text-muted">
+                                <td colspan="9" class="text-center py-5 text-muted">
                                     <i class="fas fa-star fa-3x mb-3 d-block" style="opacity: 0.3;"></i>
                                     Belum ada review yang masuk
                                 </td>

@@ -39,28 +39,6 @@
         .password-field {
             position: relative;
         }
-        .password-field .password-toggle {
-            position: absolute;
-            right: 12px;
-            top: 50%;
-            transform: translateY(-50%);
-            cursor: pointer;
-            color: #6c757d;
-            width: 36px;
-            height: 36px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 999px;
-            transition: background-color 0.2s ease, color 0.2s ease;
-        }
-        .password-field .password-toggle:hover {
-            background-color: rgba(0, 0, 0, 0.04);
-            color: #333;
-        }
-        .password-field input {
-            padding-right: 52px;
-        }
         .login-card .form-text {
             font-size: 0.9rem;
             color: #6c757d;
@@ -136,9 +114,6 @@
                                 <div class="form-group password-field mt-3">
                                     <label for="login-password" class="font-weight-bold">Password</label>
                                     <input id="login-password" type="password" name="password" class="form-control {{ $errors->has('password') ? 'is-invalid' : '' }}" placeholder="********" autocomplete="current-password" required>
-                                    <span class="password-toggle" onclick="togglePassword()">
-                                        <i id="toggle-password-icon" class="fas fa-eye"></i>
-                                    </span>
                                     @if ($errors->has('password'))
                                         <div class="invalid-feedback">{{ $errors->first('password') }}</div>
                                     @endif
@@ -155,19 +130,4 @@
         </div>
     </div>
 
-    <script>
-        function togglePassword() {
-            const passwordInput = document.getElementById('login-password');
-            const icon = document.getElementById('toggle-password-icon');
-            if (passwordInput.type === 'password') {
-                passwordInput.type = 'text';
-                icon.classList.remove('fa-eye');
-                icon.classList.add('fa-eye-slash');
-            } else {
-                passwordInput.type = 'password';
-                icon.classList.remove('fa-eye-slash');
-                icon.classList.add('fa-eye');
-            }
-        }
-    </script>
 </section> 

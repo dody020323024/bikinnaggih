@@ -15,6 +15,7 @@ class HomeController extends Controller
             'content' => 'home.home.index',
             'products' => Product::where('is_active', true)->get(),
             'reviews' => Review::where('is_approved', true)->latest()->get(),
+            'reviewProducts' => Product::where('is_active', true)->get(),
             'heroImage' => Setting::getValue('hero_image'),
             'aboutImage' => Setting::getValue('about_image'),
             'headerLogo' => Setting::getValue('header_logo', '/images/logo.png'),
@@ -69,6 +70,7 @@ class HomeController extends Controller
         $validated = $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|email|max:255',
+            'product_id' => 'required|exists:products,id',
             'rating' => 'required|integer|min:1|max:5',
             'message' => 'nullable|string|max:1000',
         ]);
