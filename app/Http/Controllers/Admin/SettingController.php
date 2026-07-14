@@ -17,7 +17,6 @@ class SettingController extends Controller
             'heroImage' => $settings['hero_image'] ?? null,
             'aboutImage' => $settings['about_image'] ?? null,
             'headerLogo' => $settings['header_logo'] ?? null,
-            'adminLoginLabel' => $settings['admin_login_label'] ?? 'Login Admin',
         ];
 
         return view('admin.layouts.wrapper', $data);
@@ -25,16 +24,6 @@ class SettingController extends Controller
 
     public function update(Request $request)
     {
-        $adminLoginLabel = trim((string) $request->input('admin_login_label'));
-        if ($adminLoginLabel !== '') {
-            Setting::updateOrCreate(
-                ['key' => 'admin_login_label'],
-                ['value' => $adminLoginLabel]
-            );
-        } else {
-            Setting::where('key', 'admin_login_label')->delete();
-        }
-
         if ($request->hasFile('hero_image')) {
             $request->validate(['hero_image' => 'image|mimes:jpeg,png,jpg,gif,webp|max:5120']);
             $imageName = 'hero-' . time() . '.' . $request->hero_image->extension();
