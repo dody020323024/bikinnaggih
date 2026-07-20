@@ -224,10 +224,10 @@ h1, h2, h3, h4, h5, h6, .navbar-brand {
 
 /* ===== Star Rating Interactive ===== */
 .star-rating {
-  display: flex;
-  flex-direction: row-reverse;
-  justify-content: flex-end;
-  gap: 4px;
+  display: inline-flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  gap: 6px;
 }
 .star-rating input {
   display: none;
@@ -235,25 +235,15 @@ h1, h2, h3, h4, h5, h6, .navbar-brand {
 .star-label {
   cursor: pointer;
   font-size: 2rem;
-  transition: transform 0.2s ease;
   line-height: 1;
+  transition: transform 0.15s ease;
+  display: inline-flex;
 }
-.star-label i {
-  color: #ddd;
-  transition: all 0.3s ease;
-}
-.star-label:hover,
-.star-label:hover ~ .star-label {
+.star-label:hover {
   transform: scale(1.2);
 }
-.star-label:hover i,
-.star-label:hover ~ .star-label i {
-  color: var(--color-secondary) !important;
-  text-shadow: 0 0 15px rgba(241, 196, 15, 0.5);
-}
-.star-rating input:checked ~ .star-label i {
-  color: var(--color-secondary) !important;
-  text-shadow: 0 0 10px rgba(241, 196, 15, 0.4);
+.star-label i {
+  transition: color 0.2s ease, text-shadow 0.2s ease;
 }
 
 /* ===== Review Form Card ===== */

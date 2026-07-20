@@ -24,7 +24,28 @@
                 </div>
 
                 <div class="card-body text-center px-4 pb-4 pt-3">
-                    <h4 class="card-title fw-bold mb-3" style="font-family: var(--font-display); color: var(--color-text);">{{ $product->name }}</h4>
+                    <h4 class="card-title fw-bold mb-2" style="font-family: var(--font-display); color: var(--color-text);">{{ $product->name }}</h4>
+                    
+                    <!-- Rating Stars -->
+                    <div class="mb-2">
+                        @if($product->reviews_count > 0)
+                            @php $starCount = round($product->rating_cache); @endphp
+                            <div class="d-inline-flex align-items-center gap-1" style="direction: ltr;">
+                                @for($i = 1; $i <= 5; $i++)
+                                    @if($i <= $starCount)
+                                        <i class="fas fa-star" style="color: #F1C40F; font-size: 0.85rem;"></i>
+                                    @else
+                                        <i class="fas fa-star" style="color: #e0e0e0; font-size: 0.85rem;"></i>
+                                    @endif
+                                @endfor
+                                <small class="text-muted ms-1">({{ $product->reviews_count }})</small>
+                            </div>
+                        @else
+                            <div class="mb-2">
+                                <small class="text-muted">Belum ada rating</small>
+                            </div>
+                        @endif
+                    </div>
                     <p class="card-text text-muted mb-5" style="line-height: 1.6; min-height: 60px;">{{ Str::limit($product->description, 100) }}</p>
                     <div class="fw-bold mb-3" style="font-size: 1.15rem; color: #c71f1f;">Rp {{ number_format($product->price, 0, ',', '.') }}</div>
                 </div>

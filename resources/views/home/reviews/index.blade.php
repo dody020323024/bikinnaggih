@@ -104,14 +104,19 @@
                         <div class="form-group mb-4">
                             <label class="form-label fw-bold small text-uppercase text-muted mb-2">Rating</label>
                             <div class="star-rating">
-                                <input type="radio" name="rating" value="1" id="star1"><label for="star1" class="star-label"><i class="fas fa-star"></i></label>
-                                <input type="radio" name="rating" value="2" id="star2"><label for="star2" class="star-label"><i class="fas fa-star"></i></label>
-                                <input type="radio" name="rating" value="3" id="star3"><label for="star3" class="star-label"><i class="fas fa-star"></i></label>
-                                <input type="radio" name="rating" value="4" id="star4"><label for="star4" class="star-label"><i class="fas fa-star"></i></label>
-                                <input type="radio" name="rating" value="5" id="star5" checked><label for="star5" class="star-label"><i class="fas fa-star"></i></label>
+                                <input type="radio" name="rating" value="1" id="star1">
+                                <label for="star1" class="star-label" data-value="1"><i class="fas fa-star"></i></label>
+                                <input type="radio" name="rating" value="2" id="star2">
+                                <label for="star2" class="star-label" data-value="2"><i class="fas fa-star"></i></label>
+                                <input type="radio" name="rating" value="3" id="star3">
+                                <label for="star3" class="star-label" data-value="3"><i class="fas fa-star"></i></label>
+                                <input type="radio" name="rating" value="4" id="star4">
+                                <label for="star4" class="star-label" data-value="4"><i class="fas fa-star"></i></label>
+                                <input type="radio" name="rating" value="5" id="star5" checked>
+                                <label for="star5" class="star-label" data-value="5"><i class="fas fa-star"></i></label>
                             </div>
                             <div class="rating-text mt-2">
-                                <small class="text-muted" id="rating-text">Sangat Baik!</small>
+                                <small class="text-muted" id="rating-text">Sangat Baik! 😍</small>
                             </div>
                         </div>
 
@@ -136,12 +141,12 @@
 </div>
 
 <script>
-document.addEventListener('DOMContentLoaded', function() {
-    const ratingInputs = document.querySelectorAll('.star-rating input[type="radio"]');
+document.addEventListener('DOMContentLoaded', function () {
+    const labels = [...document.querySelectorAll('.star-label')];
     const ratingText = document.getElementById('rating-text');
-    const labels = document.querySelectorAll('.star-label');
-    
-    const ratingMessages = {
+    const ratingContainer = document.querySelector('.star-rating');
+
+    const messages = {
         1: 'Sangat Kurang 😞',
         2: 'Kurang 😐',
         3: 'Cukup Baik 🙂',
@@ -149,57 +154,47 @@ document.addEventListener('DOMContentLoaded', function() {
         5: 'Sangat Baik! 😍'
     };
 
-    // Set initial state (5 stars checked by default)
-    updateStars(5);
+    function setStars(count) {
+        labels.forEach((label, i) => {
+            const star = label.querySelector('i');
+            const active = i < count;
+            star.className = active ? 'fas fa-star' : 'far fa-star';
+            star.style.color = active ? '#F1C40F' : '#ddd';
+            star.style.textShadow = active ? '0 0 10px rgba(241, 196, 15, 0.5)' : 'none';
+        });
+        ratingText.textContent = messages[count] || '';
+    }
 
-    ratingInputs.forEach(input => {
-        input.addEventListener('change', function() {
-            updateStars(parseInt(this.value));
+    function getValue(label) {
+        return parseInt(label.getAttribute('data-value'));
+    }
+
+    // Click: select rating
+    labels.forEach(label => {
+        label.addEventListener('click', function () {
+            const val = getValue(this);
+            document.querySelector('#star' + val).checked = true;
+            setStars(val);
         });
 
-        input.addEventListener('mouseenter', function() {
-            highlightStars(parseInt(this.value));
+        // Hover: preview
+        label.addEventListener('mouseenter', function () {
+            setStars(getValue(this));
+            this.style.transform = 'scale(1.2)';
+        });
+
+        label.addEventListener('mouseleave', function () {
+            this.style.transform = 'scale(1)';
         });
     });
 
-    // Reset on mouse leave from rating container
-    document.querySelector('.star-rating').addEventListener('mouseleave', function() {
+    // Mouse leaves the whole star area → revert to checked
+    ratingContainer.addEventListener('mouseleave', function () {
         const checked = document.querySelector('.star-rating input[type="radio"]:checked');
-        if (checked) {
-            updateStars(parseInt(checked.value));
-        }
+        if (checked) setStars(parseInt(checked.value));
     });
 
-    function updateStars(rating) {
-        labels.forEach((label, index) => {
-            const star = label.querySelector('i');
-            if (index < rating) {
-                star.className = 'fas fa-star';
-                star.style.color = '#F1C40F';
-                star.style.textShadow = '0 0 10px rgba(241, 196, 15, 0.5)';
-            } else {
-                star.className = 'far fa-star';
-                star.style.color = '#ddd';
-                star.style.textShadow = 'none';
-            }
-        });
-        ratingText.textContent = ratingMessages[rating] || '';
-    }
-
-    function highlightStars(rating) {
-        labels.forEach((label, index) => {
-            const star = label.querySelector('i');
-            if (index < rating) {
-                star.className = 'fas fa-star';
-                star.style.color = '#F1C40F';
-                star.style.textShadow = '0 0 15px rgba(241, 196, 15, 0.8)';
-            } else {
-                star.className = 'far fa-star';
-                star.style.color = '#ddd';
-                star.style.textShadow = 'none';
-            }
-        });
-        ratingText.textContent = ratingMessages[rating] || '';
-    }
+    // Init: show 5 stars selected
+    setStars(5);
 });
 </script>

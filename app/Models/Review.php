@@ -20,6 +20,27 @@ class Review extends Model
         'rating' => 'integer',
     ];
 
+    protected static function booted(): void
+    {
+        static::created(function (Review $review) {
+            if ($review->product) {
+                $review->product->updateRatingCache();
+            }
+        });
+
+        static::updated(function (Review $review) {
+            if ($review->product) {
+                $review->product->updateRatingCache();
+            }
+        });
+
+        static::deleted(function (Review $review) {
+            if ($review->product) {
+                $review->product->updateRatingCache();
+            }
+        });
+    }
+
     public function product()
     {
         return $this->belongsTo(Product::class);
