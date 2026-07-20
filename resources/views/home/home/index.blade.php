@@ -42,14 +42,6 @@
                     <a href="/#products" class="btn btn-brand rounded-pill px-4 shadow-sm">Lihat Produk</a>
                     <a href="/#contact" class="btn btn-outline-dark rounded-pill px-3" style="border-width: 2px;">Detail Kami</a>
                 </div>
-
-                <div class="mt-5 d-flex align-items-center">
-                    <div class="d-flex me-3">
-                        <div class="d-flex text-warning mb-1" style="color: var(--color-secondary) !important;">
-                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
-                        </div>
-                    </div>
-                </div>
             </div>
         </div>
     </div>
