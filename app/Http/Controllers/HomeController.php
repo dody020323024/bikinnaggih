@@ -11,6 +11,13 @@ class HomeController extends Controller
 {
     public function index()
     {
+        $avgRating = Review::where('is_approved', true)->avg('rating');
+        $totalReviews = Review::where('is_approved', true)->count();
+        $latestReview = Review::where('is_approved', true)
+            ->whereNotNull('message')
+            ->latest()
+            ->first();
+
         $data = [
             'content' => 'home.home.index',
             'products' => Product::where('is_active', true)->get(),
@@ -19,6 +26,9 @@ class HomeController extends Controller
             'heroImage' => Setting::getValue('hero_image'),
             'aboutImage' => Setting::getValue('about_image'),
             'headerLogo' => Setting::getValue('header_logo', '/images/logo.png'),
+            'overallRating' => round($avgRating, 1),
+            'totalReviews' => $totalReviews,
+            'latestTestimonial' => $latestReview?->message,
         ];
         return view('home.layouts.wrapper', $data);
     }

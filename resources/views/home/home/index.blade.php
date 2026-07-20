@@ -38,6 +38,22 @@
                 <p class="lead mb-4 text-muted" style="font-size: 1rem;">
                     Dibuat dari bahan pilihan dengan racikan bumbu rahasia yang menghasilkan sensasi renyah dan rasa pedas manis yang sempurna.
                 </p>
+                @if($totalReviews > 0)
+                <div class="d-flex align-items-center gap-3 mb-4 p-3 rounded-4" style="background: rgba(241, 196, 15, 0.08); border: 1px solid rgba(241, 196, 15, 0.2); max-width: fit-content;">
+                    <div class="d-flex align-items-center gap-1" style="color: var(--color-secondary);">
+                        @for($i = 1; $i <= 5; $i++)
+                            @if($i <= round($overallRating))
+                                <i class="fas fa-star" style="font-size: 1.1rem;"></i>
+                            @else
+                                <i class="far fa-star" style="font-size: 1.1rem; color: #ddd;"></i>
+                            @endif
+                        @endfor
+                    </div>
+                    <span class="fw-bold" style="font-size: 1.1rem;">{{ number_format($overallRating, 1) }}</span>
+                    <span class="text-muted small">· {{ $totalReviews }} ulasan</span>
+                </div>
+                @endif
+
                 <div class="d-flex flex-wrap gap-3">
                     <a href="/#products" class="btn btn-brand rounded-pill px-4 shadow-sm">Lihat Produk</a>
                     <a href="/#contact" class="btn btn-outline-dark rounded-pill px-3" style="border-width: 2px;">Detail Kami</a>
