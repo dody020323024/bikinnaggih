@@ -41,10 +41,10 @@
                                         <span class="ml-1 small text-muted">({{ $review->rating }}/5)</span>
                                     </div>
                                 </td>
-                                <td>
-                                    <span class="text-truncate" style="max-width: 200px; display: inline-block;">
+                                <td style="min-width: 260px; white-space: normal;">
+                                    <div style="max-width: 320px; word-break: break-word; line-height: 1.5;">
                                         {{ $review->message ?: '-' }}
-                                    </span>
+                                    </div>
                                 </td>
                                 <td>
                                     <small class="text-muted">{{ $review->created_at->diffForHumans() }}</small>
