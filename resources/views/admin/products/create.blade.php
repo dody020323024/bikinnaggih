@@ -42,10 +42,15 @@
                         </div>
                     </div>
                     <div class="form-group mb-4">
-                        <div class="custom-control custom-switch">
+                        <div class="custom-control custom-switch mb-2">
                             <input type="hidden" name="is_active" value="0">
                             <input type="checkbox" class="custom-control-input" name="is_active" id="is_active" value="1" checked>
                             <label class="custom-control-label" for="is_active">Aktifkan Produk</label>
+                        </div>
+                        <div class="custom-control custom-switch">
+                            <input type="hidden" name="is_out_of_stock" value="0">
+                            <input type="checkbox" class="custom-control-input" name="is_out_of_stock" id="is_out_of_stock" value="1">
+                            <label class="custom-control-label" for="is_out_of_stock">Produk Habis</label>
                         </div>
                     </div>
                     <div class="form-group mb-0 text-right">

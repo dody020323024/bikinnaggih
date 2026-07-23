@@ -12,12 +12,14 @@ class Product extends Model
         'price',
         'image',
         'is_active',
+        'is_out_of_stock',
         'rating_cache',
         'reviews_count',
     ];
 
     protected $casts = [
         'is_active' => 'boolean',
+        'is_out_of_stock' => 'boolean',
         'rating_cache' => 'decimal:2',
         'reviews_count' => 'integer',
     ];

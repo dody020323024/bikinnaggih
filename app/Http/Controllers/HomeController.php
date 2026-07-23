@@ -20,9 +20,9 @@ class HomeController extends Controller
 
         $data = [
             'content' => 'home.home.index',
-            'products' => Product::where('is_active', true)->get(),
+            'products' => Product::where('is_active', true)->where('is_out_of_stock', false)->get(),
             'reviews' => Review::where('is_approved', true)->latest()->get(),
-            'reviewProducts' => Product::where('is_active', true)->get(),
+            'reviewProducts' => Product::where('is_active', true)->where('is_out_of_stock', false)->get(),
             'heroImage' => Setting::getValue('hero_image'),
             'aboutImage' => Setting::getValue('about_image'),
             'headerLogo' => Setting::getValue('header_logo', '/images/logo.png'),
@@ -46,7 +46,7 @@ class HomeController extends Controller
     {
         $data = [
             'content' => 'home.services.index',
-            'products' => Product::where('is_active', true)->get(),
+            'products' => Product::where('is_active', true)->where('is_out_of_stock', false)->get(),
             'headerLogo' => Setting::getValue('header_logo', '/images/logo.png'),
         ];
         return view('home.layouts.wrapper', $data);

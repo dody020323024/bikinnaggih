@@ -44,7 +44,8 @@ class ProductController extends Controller
         ]);
 
         $data = $request->all();
-        $data['is_active'] = $request->has('is_active') ? 1 : 0;
+        $data['is_active'] = $request->boolean('is_active') ? 1 : 0;
+        $data['is_out_of_stock'] = $request->boolean('is_out_of_stock') ? 1 : 0;
 
         if ($request->hasFile('image')) {
             $imageName = time() . '.' . $request->image->extension();
@@ -81,7 +82,8 @@ class ProductController extends Controller
 
         $product = \App\Models\Product::findOrFail($id);
         $data = $request->all();
-        $data['is_active'] = $request->has('is_active') ? 1 : 0;
+        $data['is_active'] = $request->boolean('is_active') ? 1 : 0;
+        $data['is_out_of_stock'] = $request->boolean('is_out_of_stock') ? 1 : 0;
 
         if ($request->hasFile('image')) {
             $imageName = time() . '.' . $request->image->extension();

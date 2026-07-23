@@ -63,7 +63,9 @@
                                     <i class="fas fa-star me-1" style="color: #F1C40F;"></i> {{ number_format($product->rating_cache, 1) }} ({{ $product->reviews_count }})
                                 </span>
                             @endif
-                            @if($product->is_active)
+                            @if($product->is_out_of_stock)
+                                <span class="badge badge-danger px-2 py-1" style="border-radius: 6px; font-weight: 500;">Habis</span>
+                            @elseif($product->is_active)
                                 <span class="badge badge-success px-2 py-1" style="border-radius: 6px; font-weight: 500;">Aktif</span>
                             @else
                                 <span class="badge badge-secondary px-2 py-1" style="border-radius: 6px; font-weight: 500;">Draft</span>
